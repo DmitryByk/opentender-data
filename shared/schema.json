@@ -1,5 +1,4 @@
 {
-  "#schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "date": {
       "type": "string",
@@ -10,7 +9,7 @@
     "date-time": {
       "type": "string",
       "title": "TenderDateTime",
-      "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d$",
+      "pattern": "^\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d",
       "description": "Date with time YYYY.MM.DDThh:mm:ss"
     },
     "supply-type": {
@@ -50,7 +49,8 @@
       "title": "Size Type",
       "enum": [
         "BELOW_THE_THRESHOLD",
-        "ABOVE_THE_THRESHOLD"
+        "ABOVE_THE_THRESHOLD",
+        "SMALL_SCALE"
       ]
     },
     "selection-method": {
@@ -91,7 +91,6 @@
         "OTHER",
         "COMPILED"
       ],
-      "distinct": true,
       "description": "undocumented form-type enumeration"
     },
     "indicator-type": {
@@ -112,21 +111,32 @@
         "ADMINISTRATIVE_ENGLISH_AS_FOREIGN_LANGUAGE",
         "ADMINISTRATIVE_NOTICE_AND_AWARD_DISCREPANCIES",
         "TRANSPARENCY_NUMBER_OF_KEY_MISSING_FIELDS",
+        "TRANSPARENCY_AWARD_DATE_MISSING",
+        "TRANSPARENCY_BUYER_NAME_MISSING",
+        "TRANSPARENCY_PROC_METHOD_MISSING",
+        "TRANSPARENCY_BUYER_LOC_MISSING",
+        "TRANSPARENCY_BIDDER_ID_MISSING",
+        "TRANSPARENCY_BIDDER_NAME_MISSING",
+        "TRANSPARENCY_MARKET_MISSING",
+        "TRANSPARENCY_TITLE_MISSING",
+        "TRANSPARENCY_VALUE_MISSING",
+        "TRANSPARENCY_YEAR_MISSING",
         "INTEGRITY_WINNER_CA_SHARE",
         "INTEGRITY_NR_OF_REQUESTED_BIDS",
-        "TRANSPARENCY_BUYER_NAME_MISSING",
-        "TRANSPARENCY_TITLE_MISSING",
-        "TRANSPARENCY_BIDDER_NAME_MISSING",
-        "TRANSPARENCY_BIDDER_ID_MISSING",
         "TRANSPARENCY_CA_TYPE_MISSING",
-        "TRANSPARENCY_VALUE_MISSING",
         "TRANSPARENCY_IMP_LOC_MISSING",
-        "TRANSPARENCY_PROC_METHOD_MISSING",
         "TRANSPARENCY_BID_NR_MISSING",
-        "TRANSPARENCY_AWARD_DATE_MISSING",
         "TRANSPARENCY_HEADOFENTITY_DATE_MISSING",
         "TRANSPARENCY_COMMITTEE_DATE_MISSING",
-        "TRANSPARENCY_YEAR_MISSING"
+
+        "TRANSPARENCY_MISSING_OR_INCOMPLETE_AWARD_CRITERIA",
+        "TRANSPARENCY_MISSING_ELIGIBLE_BID_LANGUAGES",
+        "TRANSPARENCY_MISSING_OR_INCOMPLETE_FUNDINGS_INFO",
+        "TRANSPARENCY_MISSING_OR_INCOMPLETE_DURATION_INFO",
+        "TRANSPARENCY_MISSING_SUBCONTRACTED_INFO",
+        "TRANSPARENCY_MISSING_ADDRESS_OF_IMPLEMENTATION_NUTS",
+        "TRANSPARENCY_MISSING_OR_INCOMPLETE_CPVS",
+        "TRANSPARENCY_MISSING_SELECTION_METHOD"
       ]
     },
     "score-type": {
@@ -143,8 +153,8 @@
     "indicator-value": {
       "type": "number",
       "title": "Indicator Score",
-      "min": 0,
-      "max": 100
+      "minimum": 0,
+      "maximum": 100
     },
     "indicator-status-type": {
       "type": "string",
@@ -152,15 +162,14 @@
       "enum": [
         "CALCULATED",
         "INSUFFICIENT_DATA",
-        "INSUFFICIENT",
-        "UNDEFINED"
+        "UNDEFINED",
+        "INSUFFICIENT"
       ]
     },
     "language": {
       "type": "string",
       "title": "Language",
-      "description": "undocumented language enumeration",
-      "distinct": true
+      "description": "undocumented language enumeration"
     },
     "cpv": {
       "type": "object",
@@ -245,8 +254,7 @@
       "properties": {
         "currency": {
           "type": "string",
-          "description": "ISO 4217 of used currency",
-          "distinct": true
+          "description": "ISO 4217 of used currency"
         },
         "publicationDate": {
           "$ref": "#/definitions/date",
@@ -254,8 +262,7 @@
         },
         "currencyNational": {
           "type": "string",
-          "description": "ISO 4217 of used currency",
-          "distinct": true
+          "description": "ISO 4217 of used currency"
         },
         "vat": {
           "type": "number",
@@ -956,7 +963,8 @@
             "ANNOUNCED",
             "AWARDED",
             "CANCELLED",
-            "PREPARED"
+            "PREPARED",
+            "FINISHED"
           ]
         }
       }
@@ -1399,54 +1407,6 @@
                   "$ref": "#/definitions/indicator-value"
                 },
                 "TRANSPARENCY_NUMBER_OF_KEY_MISSING_FIELDS": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "ADMINISTRATIVE_NOTICE_AND_AWARD_DISCREPANCIES": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "INTEGRITY_WINNER_CA_SHARE": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "INTEGRITY_NR_OF_REQUESTED_BIDS": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_BUYER_NAME_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_TITLE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_BIDDER_NAME_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_BIDDER_ID_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_CA_TYPE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_VALUE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_IMP_LOC_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_PROC_METHOD_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_BID_NR_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_AWARD_DATE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_HEADOFENTITY_DATE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_COMMITTEE_DATE_MISSING": {
-                  "$ref": "#/definitions/indicator-value"
-                },
-                "TRANSPARENCY_YEAR_MISSING": {
                   "$ref": "#/definitions/indicator-value"
                 }
               }
